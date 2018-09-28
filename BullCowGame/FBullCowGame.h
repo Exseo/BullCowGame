@@ -30,6 +30,6 @@ private:
 	// see constructor for initialisation
 	int32 MyCurrentTry;
 	int32 MyMaxTries;
-	FString MyHiddenWord = "alphabets";
+	FString MyHiddenWord = "ant";
 	
 };

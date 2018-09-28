@@ -12,7 +12,7 @@ void FBullCowGame::Reset()
 {
 	constexpr int32 MAX_TRIES = 8;
 	MyMaxTries = MAX_TRIES;
-
+	
 	MyCurrentTry = 1;
 	return;
 }
@@ -39,23 +39,21 @@ FBullCowCount FBullCowGame::SubmitGuess(FString Guess)
 	
 	//loop through letters of GetGuess
 	int32 HiddenWordLength = MyHiddenWord.length();
-	for (int32 i = 0; i < HiddenWordLength; i++) 
+	for (int32 MHWChar = 0; MHWChar < HiddenWordLength; MHWChar++) 
 	{
 		//compare letters to hidden word
-		for (int32 j = 0; j < HiddenWordLength; j++) 
+		for (int32 GChar = 0; GChar < HiddenWordLength; GChar++) 
 		{
 		//if they match then
-			if (Guess[i] == MyHiddenWord[j]) 
+			if (Guess[GChar] == MyHiddenWord[MHWChar]) 
 			{//if they are in the same place
-				if (i == j)
+				if (MHWChar == GChar)
 				{//increment bulls
 					BullCowCount.Bulls += 1;
-					continue;
 				}
 				else 
 				{// else increment cows - counts second letters in word as cows AND bulls?
 					BullCowCount.Cows += 1;
-					continue;
 				}
 			}
 			else continue;
