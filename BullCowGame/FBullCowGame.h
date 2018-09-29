@@ -33,6 +33,8 @@ public:
 	int32 GetCurrentTry() const;
 	int32 GetHiddenWordLength() const;
 	bool IsGameWon() const;
+	bool IsUppercase(FString ThisGuess) const;
+	bool IsNonAlpha(FString ThisGuess) const;
 	EGuessStatus CheckGuessValidity(FString) const; // TODO Make a more rich return value
 	
 	void Reset(); // TODO make a more rich return value.
@@ -47,4 +49,6 @@ private:
 	int32 MyMaxTries;
 	bool bGameIsWon = false;
 	FString MyHiddenWord = "world";
+
+	bool IsIsogram(FString ThisGuess) const;
 };

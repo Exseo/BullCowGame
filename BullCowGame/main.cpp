@@ -13,6 +13,7 @@ using int32 = int;
 
 void PrintIntro();
 void PlayGame();
+void PrintGameSummary();
 FText GetValidGuess();
 bool AskToPlayAgain();
 
@@ -26,6 +27,7 @@ int main()
 	do {
 		PrintIntro();
 		PlayGame();
+		PrintGameSummary();
 		bPlayAgain = AskToPlayAgain();
 	}
 	while (bPlayAgain);
@@ -69,13 +71,16 @@ void PlayGame()
 	}
 
 	// TODO summarise game
+
+	return;
 }
 
 // loop continualy until the user gives a valid guess
 FText GetValidGuess()
 {
 		EGuessStatus Status = EGuessStatus::InvalidStatus;
-		FText Guess;
+		FText Guess; 
+		FText LastGuess;
 	do {
 
 		// get a guess from the player
@@ -111,12 +116,37 @@ FText GetValidGuess()
 		}
 		std::cout << std::endl;
 	}while (Status != EGuessStatus::OK); // keep looping until we get no errors
+	LastGuess = Guess;
 	return Guess;
+}
+
+//End game print statements
+void PrintGameSummary()
+{
+	std::cout << "\n\n";
+	if (BCGame.IsGameWon())
+	{//game is won
+		std::cout << "Wow! You really are good at this game! It only took you ";
+		if (BCGame.GetCurrentTry() == 2)
+		{
+			std::cout << " 1 try! I can hardly believe it! 0w0\n";
+		}
+		else
+		{
+			std::cout << BCGame.GetCurrentTry() - 1 << " tries!\n";
+		}
+		std::cout << "\nThink you can do it again?\n";
+	}
+	else
+	{//game was lost
+		std::cout << "Too bad, you lost! But don't worry, you can always try again!\n";
+	}
 }
 
 bool AskToPlayAgain()
 {
-	std::cout << "Do you want to play again (y/n)? ";
+	std::cout << "\n    ---------------------------\n";
+	std::cout << "     Do you want to play another round with that same word(y/n)? ";
 	FText Response = "";
 	std::getline(std::cin, Response);
 	return (Response[0] == 'y') || (Response[0] == 'Y');
