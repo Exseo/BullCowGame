@@ -8,11 +8,12 @@ FBullCowGame::FBullCowGame() { Reset(); }
 int32 FBullCowGame::GetMaxTries() const { return MyMaxTries;}
 int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
 
+int32 FBullCowGame::GetHiddenWordLength() const { return MyHiddenWord.length(); }
+
 void FBullCowGame::Reset()
 {
 	constexpr int32 MAX_TRIES = 8;
 	MyMaxTries = MAX_TRIES;
-	
 	MyCurrentTry = 1;
 	return;
 }
@@ -22,10 +23,26 @@ bool FBullCowGame::IsGameWon() const
 	return false;
 }
 
-bool FBullCowGame::CheckGuessValidity(FString)
+EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 {
-	return false;
+	if (false)//If the guess isn't an isogram
+	{
+		return EGuessStatus::Not_Isogram;
+	}
+	else if (false)//If guess length isn't all lowercase
+	{
+		return EGuessStatus::Not_Lowercase;
+	}
+	else if (Guess.length() != GetHiddenWordLength() )//If the guess length is wrong
+	{
+		return EGuessStatus::Wrong_Length;
+	}
+	else 
+	{
+		return EGuessStatus::OK;
+	}
 }
+
 
 
 //recieves a valid guess, increments turn, and returns count
